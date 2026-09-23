@@ -1,0 +1,17 @@
+{
+  "name": "a2e76ac3fa",
+  "owner": {
+    "name": "8ca3f48594",
+    "url": "https://github.com/8ca3f48594"
+  },
+  "metadata": {
+    "description": "Private plugin catalog"
+  },
+  "plugins": [
+    {
+      "name": "c90373deff",
+      "source": "./plugins/claude-clear-explanations",
+      "description": "Direct, audience-aware explanations with a conservative output check."
+    }
+  ]
+}

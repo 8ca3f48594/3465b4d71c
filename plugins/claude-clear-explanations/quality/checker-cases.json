@@ -1,0 +1,720 @@
+{
+  "version": "1.0.0",
+  "cases": [
+    {
+      "id": "clean-cache-explanation",
+      "tags": ["clean-direct"],
+      "text": "The cache stores the resolved value after the first read. Later calls return that value without opening the file again.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "clean-null-guard",
+      "tags": ["clean-direct"],
+      "text": "The null guard exits before the lookup because a missing account cannot own a saved preference.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "clean-async-error",
+      "tags": ["clean-direct"],
+      "text": "The rejected promise reaches the caller because this function does not catch it. The caller must handle the error or let its own promise reject.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "legitimate-single-heading",
+      "tags": ["legitimate-headings"],
+      "text": "## Why the guard exists\n\nThe guard prevents a second write after the request has completed.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "legitimate-three-headings",
+      "tags": ["legitimate-headings", "tutorial-detail"],
+      "text": "## Input\n\nThe parser accepts one JSON string.\n\n## Validation\n\nIt rejects values without an integer id.\n\n## Result\n\nIt returns the validated object.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "tutorial-numbered-steps",
+      "tags": ["tutorial-detail"],
+      "text": "To trace the request:\n\n1. Put a breakpoint in `loadUser`.\n2. Send one request with a known id.\n3. Inspect the value returned by `repository.find`.\n4. Step into the serializer and compare the response body.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "tutorial-detailed-paragraphs",
+      "tags": ["tutorial-detail"],
+      "text": "Start the server with the repository's development command. Send a request to the local endpoint, then read the request id from the response header. Search the structured log for that id to see the handler, database call, and serializer in execution order. If the database call fails, compare its error code with the handler's mapping table.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "fenced-complete-bad-cluster",
+      "tags": ["fenced-code"],
+      "text": "The fixture deliberately contains prose-like tokens.\n\n```text\nYou're absolutely right to ask.\n## Overview\n## Mechanics\n## Tradeoffs\n## Summary\nWould you like me to continue?\n```",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "fenced-javascript-string",
+      "tags": ["fenced-code"],
+      "text": "This constant preserves the prompt for a snapshot test.\n\n```js\nconst prompt = \"Would you like me to explain anything else?\";\nconst heading = \"## Overview\";\n```",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "fenced-tilde-marker",
+      "tags": ["fenced-code"],
+      "text": "The alternate Markdown fence is valid too.\n\n~~~md\nSure. I'd be happy to explain!\n## One\n## Two\n## Three\n## Four\nWould you like me to continue?\n~~~",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "canned-absolutely-alone",
+      "tags": ["canned-opening"],
+      "text": "Absolutely. The mutex serializes writers, so only one callback can change the shared map at a time.",
+      "expectedRuleIds": ["canned-preamble"],
+      "shouldBlock": false
+    },
+    {
+      "id": "canned-great-question-alone",
+      "tags": ["canned-opening"],
+      "text": "Great question: the closure retains the counter between calls because the returned function still references its lexical scope.",
+      "expectedRuleIds": ["canned-preamble"],
+      "shouldBlock": false
+    },
+    {
+      "id": "canned-sure-alone",
+      "tags": ["canned-opening"],
+      "text": "Sure. The index speeds this query by letting the database locate matching rows without scanning the table.",
+      "expectedRuleIds": ["canned-preamble"],
+      "shouldBlock": false
+    },
+    {
+      "id": "four-headings-alone",
+      "tags": ["excessive-headings"],
+      "text": "## Input\nOne string.\n\n## Parse\nDecode JSON.\n\n## Validate\nCheck the id.\n\n## Return\nYield the object.",
+      "expectedRuleIds": ["heading-overload"],
+      "shouldBlock": false
+    },
+    {
+      "id": "five-headings-alone",
+      "tags": ["excessive-headings", "tutorial-detail"],
+      "text": "# Install\nRun the package command.\n\n## Configure\nSet the local URL.\n\n## Start\nLaunch the process.\n\n## Verify\nCall the health endpoint.\n\n## Debug\nRead the structured log.",
+      "expectedRuleIds": ["heading-overload"],
+      "shouldBlock": false
+    },
+    {
+      "id": "terminal-offer-alone",
+      "tags": ["generic-follow-up-offer"],
+      "text": "The function is pure because it reads only its arguments and returns a new value. Would you like me to walk through a trace?",
+      "expectedRuleIds": ["offer-to-continue"],
+      "shouldBlock": true
+    },
+    {
+      "id": "terminal-explain-offer-alone",
+      "tags": ["generic-follow-up-offer"],
+      "text": "The second branch handles expired sessions by clearing the cookie and returning 401. Would you like me to explain the middleware too?",
+      "expectedRuleIds": ["offer-to-continue"],
+      "shouldBlock": true
+    },
+    {
+      "id": "block-canned-plus-headings",
+      "tags": ["combined-blocking-cluster", "canned-opening", "excessive-headings"],
+      "text": "You're absolutely right to ask.\n\n## Input\nRead the bytes.\n\n## Parse\nDecode JSON.\n\n## Validate\nCheck the schema.\n\n## Return\nYield configuration.",
+      "expectedRuleIds": ["canned-preamble", "heading-overload"],
+      "shouldBlock": true
+    },
+    {
+      "id": "block-all-three-rules",
+      "tags": ["combined-blocking-cluster", "canned-opening", "excessive-headings", "generic-follow-up-offer"],
+      "text": "You're absolutely right. I'd be happy to explain!\n\n## Input\nRead the bytes.\n\n## Parse\nDecode JSON.\n\n## Validate\nCheck the schema.\n\n## Return\nYield configuration.\n\nWould you like me to explain anything else?",
+      "expectedRuleIds": ["canned-preamble", "heading-overload", "offer-to-continue"],
+      "shouldBlock": true
+    },
+    {
+      "id": "headings-plus-offer-blocks",
+      "tags": ["excessive-headings", "generic-follow-up-offer"],
+      "text": "## Input\nRead bytes.\n\n## Parse\nDecode JSON.\n\n## Validate\nCheck schema.\n\n## Return\nYield configuration.\n\nWould you like me to continue?",
+      "expectedRuleIds": ["heading-overload", "offer-to-continue"],
+      "shouldBlock": true
+    },
+    {
+      "id": "emoji-before-heading-finding",
+      "tags": ["non-bmp-offsets", "excessive-headings"],
+      "text": "Trace complete 🧭\n\n## Read\nLoad the file.\n\n## Parse\nDecode it.\n\n## Check\nValidate it.\n\n## Return\nUse it.",
+      "expectedRuleIds": ["heading-overload"],
+      "shouldBlock": false
+    },
+    {
+      "id": "emoji-between-all-findings",
+      "tags": ["non-bmp-offsets", "combined-blocking-cluster"],
+      "text": "Absolutely. 🧭\n\n## Read\nLoad the file.\n\n## Parse\nDecode it.\n\n## Check\nValidate it.\n\n## Return\nUse it.\n\nWould you like me to continue?",
+      "expectedRuleIds": ["canned-preamble", "heading-overload", "offer-to-continue"],
+      "shouldBlock": true
+    },
+    {
+      "id": "empty-string",
+      "tags": ["malformed-empty"],
+      "text": "",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "null-text",
+      "tags": ["malformed-empty"],
+      "text": null,
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "object-text",
+      "tags": ["malformed-empty"],
+      "text": {"unexpected": "shape"},
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "mixed-crlf-blocking",
+      "tags": ["mixed-crlf", "combined-blocking-cluster"],
+      "text": "Sure.\r\n\r\n## Read\nLoad it.\r\n\r\n## Parse\r\nDecode it.\n\n## Check\r\nValidate it.\r\n\r\n## Return\nUse it.\r\n\r\nWould you like me to continue?",
+      "expectedRuleIds": ["canned-preamble", "heading-overload", "offer-to-continue"],
+      "shouldBlock": true
+    },
+    {
+      "id": "mixed-crlf-clean",
+      "tags": ["mixed-crlf", "legitimate-headings"],
+      "text": "## Cause\r\nThe socket closed before the write.\n\n## Fix\r\nRetry only idempotent requests.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "sure-contextual-variable",
+      "tags": ["false-positive-counterexample"],
+      "text": "The variable named `sure` is a boolean from the legacy payload; rename it when the wire format can change.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "absolutely-contextual-adverb",
+      "tags": ["false-positive-counterexample"],
+      "text": "The timeout is absolutely required here because the upstream service can leave a connection open indefinitely.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "would-you-like-quoted-context",
+      "tags": ["false-positive-counterexample"],
+      "text": "The snapshot expects the literal prompt `Would you like me to retry?`, including its question mark.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "would-you-like-user-flow",
+      "tags": ["false-positive-counterexample"],
+      "text": "When the dialog asks \"Would you like to save?\", the confirm branch writes the file and the cancel branch returns without changing it.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "single-contextual-contrast",
+      "tags": ["false-positive-counterexample"],
+      "text": "This is not a retry loop; it is a guard that prevents duplicate writes.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "git-ideal-introduction",
+      "tags": ["git-misconception", "git-false-positive", "clean-direct"],
+      "text": "Git is a tool that keeps selected versions of a project so you can inspect an earlier version or restore its file contents later. It records a snapshot of the project each time you deliberately make a record called a commit. Saving a file in your editor does not make a commit, and Git does not automatically record every edit.\n\nImagine you are making a digital painting. You finish the outline, prepare that version for Git to record, and make a commit. Later, you add a blue sky and prepare and commit that version too. The blue sky commit keeps the earlier outline in the project's history. If you then try an orange sky and prefer the blue one, you can inspect or restore the recorded blue sky version.\n\nThe useful distinction is between the file you are currently editing and the versions you have deliberately recorded. New commits normally add to the history while keeping earlier commits available. That lets you keep developing the painting without losing its recorded stages, but it does not guarantee that an unrecorded edit can be recovered.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "git-every-change-recorded",
+      "tags": ["git-misconception"],
+      "text": "Git tracks your painting so every change was recorded as you worked, including ordinary editor saves.",
+      "expectedRuleIds": ["git-records-every-edit"],
+      "shouldBlock": true
+    },
+    {
+      "id": "git-commit-overwrites-history",
+      "tags": ["git-misconception"],
+      "text": "After you commit the night sky, a new commit on that branch would overwrite an earlier committed version of the daytime painting.",
+      "expectedRuleIds": ["git-opening-hides-subject", "git-commit-overwrites-history"],
+      "shouldBlock": true
+    },
+    {
+      "id": "git-automatic-image-merge",
+      "tags": ["git-misconception"],
+      "text": "When both branches change the painting, Git will automatically merge the two image files into one picture.",
+      "expectedRuleIds": ["git-automatic-image-merge"],
+      "shouldBlock": true
+    },
+    {
+      "id": "git-create-branch-without-switch",
+      "tags": ["git-misconception"],
+      "text": "Create a night-scene branch and commit the change to darken the sky.",
+      "expectedRuleIds": ["git-create-branch-skips-switch", "git-opening-hides-subject"],
+      "shouldBlock": true
+    },
+    {
+      "id": "git-opening-hides-subject",
+      "tags": ["git-misconception"],
+      "text": "Suppose you want to keep developing a daytime painting and also try a night scene. Start with the recorded daytime version. Create a night-scene branch and switch to it. Darken the sky and commit the change. The night-scene branch now has that new version.",
+      "expectedRuleIds": ["git-opening-hides-subject"],
+      "shouldBlock": true
+    },
+    {
+      "id": "ai-process-narration",
+      "tags": ["ai-ism"],
+      "text": "Let me explain Git. It keeps selected versions of a project so you can restore a recorded snapshot.",
+      "expectedRuleIds": ["ai-process-narration"],
+      "shouldBlock": true
+    },
+    {
+      "id": "ai-throat-clearing",
+      "tags": ["ai-ism"],
+      "text": "It's worth noting that Git records a snapshot only when you make a commit.",
+      "expectedRuleIds": ["ai-throat-clearing"],
+      "shouldBlock": true
+    },
+    {
+      "id": "ai-signposted-recap",
+      "tags": ["ai-ism"],
+      "text": "Git keeps selected versions of a project. In conclusion, commits preserve earlier history.",
+      "expectedRuleIds": ["ai-signposted-recap"],
+      "shouldBlock": true
+    },
+    {
+      "id": "ai-ism-false-positive-walkthrough-noun",
+      "tags": ["ai-ism", "false-positive-counterexample"],
+      "text": "The walk-through test covers the loader path and returns the cached value.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "ai-topic-menu-git-closer",
+      "tags": ["ai-ism"],
+      "text": "Git is version control software: it lets you save specific versions of a project so you can look back at an earlier version. Saving a file in your editor is not the same as recording a version in Git. From here, there's more to Git (like how you prepare a version before saving it, or how to work on separate versions in parallel, or how to share versions with others).",
+      "expectedRuleIds": ["ai-topic-menu"],
+      "shouldBlock": true
+    },
+    {
+      "id": "native-let-me-know-offer",
+      "tags": ["generic-follow-up-offer", "ai-ism"],
+      "text": "Git is a tool that keeps selected versions of a project so you can restore an earlier one. Let me know if you want to go into any of those next.",
+      "expectedRuleIds": ["offer-to-continue"],
+      "shouldBlock": true
+    },
+    {
+      "id": "offer-you-would-like-next",
+      "tags": ["generic-follow-up-offer", "ai-ism"],
+      "text": "A race condition is two tasks reading the same value. The counter ends at 6. One increment is lost. Let me know if you'd like that mechanism explained next.",
+      "expectedRuleIds": ["offer-to-continue"],
+      "shouldBlock": true
+    },
+    {
+      "id": "walkthrough-example-chrome",
+      "tags": ["empty-setup", "false-positive-counterexample"],
+      "text": "A GPU is a chip that runs many identical additions at once.\n\n**Example**\n\nCopy lists A and B to device memory, then add each pair in its own thread. The result is copied back to host memory.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "numbered-rate-rows-are-not-terms",
+      "tags": ["named-referent", "false-positive-counterexample"],
+      "text": "A game loop is one pass that updates and draws the scene.\n\n- At 30 FPS: 1 pixel/frame times 30 frames/sec equals 30 pixels/sec.\n- At 60 FPS: 1 pixel/frame times 60 frames/sec equals 60 pixels/sec.\n\nThe same step covers twice the distance in one second.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "ai-key-thing-lead-in",
+      "tags": ["ai-ism"],
+      "text": "Here's the key thing to understand first. Git records a snapshot only when you make a commit.",
+      "expectedRuleIds": ["ai-throat-clearing"],
+      "shouldBlock": true
+    },
+    {
+      "id": "opening-skips-kind-cache",
+      "tags": ["ai-ism"],
+      "text": "CPU caches exist so each core can keep a fast local copy of data it's working with, instead of reaching out to slower RAM on every single access.",
+      "expectedRuleIds": ["opening-skips-kind"],
+      "shouldBlock": true
+    },
+    {
+      "id": "opening-skips-kind-wal",
+      "tags": ["ai-ism"],
+      "text": "A write-ahead log is how a database writes a log before it updates the table file.",
+      "expectedRuleIds": ["opening-skips-kind"],
+      "shouldBlock": true
+    },
+    {
+      "id": "opening-skips-kind-await",
+      "tags": ["opening-order", "ai-ism"],
+      "text": "Awaiting a coroutine runs it immediately inside your current task, so your code pauses there and nothing else gets a chance to run until that specific await finishes. create_task instead hands the coroutine to the event loop as a separate task right away.",
+      "expectedRuleIds": ["opening-skips-kind"],
+      "shouldBlock": true
+    },
+    {
+      "id": "opening-defines-coroutine-then-walkthrough",
+      "tags": ["opening-order", "false-positive-counterexample"],
+      "text": "A coroutine is an object a function call builds but does not run. Awaiting that object runs it in the current task. create_task is a separate task the event loop can switch to during a wait.\n\nSequential await is 5 seconds. Both tasks at once is 3.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "empty-setup-live-race",
+      "tags": ["empty-setup", "ai-ism"],
+      "text": "A race condition is two tasks reading and writing the same shared value, where the final result depends on the exact order their steps happen to run in. When both tasks are trying to do the same increment, one of the increments can vanish.\n\nHere's why. Increment is three steps: read, add, write. Both write 6, so one increment is lost.",
+      "expectedRuleIds": ["empty-setup-sentence"],
+      "shouldBlock": true
+    },
+    {
+      "id": "empty-setup-role-noun",
+      "tags": ["empty-setup", "ai-ism"],
+      "text": "A race condition is two tasks reading and writing the same shared value. This is the point. Both write 6 so one increment is lost.",
+      "expectedRuleIds": ["empty-setup-sentence"],
+      "shouldBlock": true
+    },
+    {
+      "id": "empty-setup-keeps-result",
+      "tags": ["empty-setup", "false-positive-counterexample"],
+      "text": "A race condition is two tasks reading and writing the same shared value. The counter ends at 6. One increment is lost.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "empty-setup-announces-matters",
+      "tags": ["empty-setup", "ai-ism"],
+      "text": "A Docker image is packaged files and startup configuration, like a recipe. Here's why that matters. A container is one running instance of that image, like a dish made from that recipe. Replace the container (the running dish) from the same image (the recipe). The log is gone.",
+      "expectedRuleIds": ["empty-setup-sentence"],
+      "shouldBlock": true
+    },
+    {
+      "id": "empty-setup-another-term-coming",
+      "tags": ["empty-setup", "ai-ism"],
+      "text": "A cache is a fast local copy, like a notebook. Another term is coming. Later reads return the cache (the notebook) without opening the file.",
+      "expectedRuleIds": ["empty-setup-sentence"],
+      "shouldBlock": true
+    },
+    {
+      "id": "empty-setup-matters-with-cause",
+      "tags": ["empty-setup", "false-positive-counterexample"],
+      "text": "A cache is a fast local copy, like a notebook. The stored copy matters because later reads skip the file. Later reads return the cache (the notebook) without opening the file.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "empty-setup-announces-terms-coming",
+      "tags": ["empty-setup", "ai-ism"],
+      "text": "A request is a message that names an action. A few terms the example needs: a client is the program sending the request. Repeating the same request leaves the same end state.",
+      "expectedRuleIds": ["empty-setup-sentence"],
+      "shouldBlock": true
+    },
+    {
+      "id": "empty-setup-announces-terms-twin",
+      "tags": ["empty-setup", "ai-ism"],
+      "text": "A cache is a fast local copy. These terms this example needs: a miss is a read that opens the file. Later reads return the stored copy.",
+      "expectedRuleIds": ["empty-setup-sentence"],
+      "shouldBlock": true
+    },
+    {
+      "id": "opening-jumps-to-story-race",
+      "tags": ["opening-order", "ai-ism"],
+      "text": "A race condition is two tasks reading and writing the same shared value, where the final result depends on the exact order their steps happen to run in. When both tasks are trying to do the same increment, one of the increments can vanish.\n\n1. Read the current value.\n2. Add one to it.\n3. Write the new value back.\n\nThe counter ends at 6. One increment is lost.",
+      "expectedRuleIds": ["opening-jumps-to-story"],
+      "shouldBlock": true
+    },
+    {
+      "id": "opening-jumps-to-story-wal",
+      "tags": ["opening-order", "ai-ism"],
+      "text": "A write-ahead log is a record of changes written to disk before the table file is updated. Recovery replays that record after a crash.\n\n1. Write the log entry.\n2. Confirm it is on disk.\n3. Update the table file.",
+      "expectedRuleIds": ["opening-jumps-to-story"],
+      "shouldBlock": true
+    },
+    {
+      "id": "opening-states-result-before-mapping",
+      "tags": ["opening-order", "ai-ism"],
+      "text": "A container's writable layer disappears when you replace the container, because that layer belongs to the specific running instance, not to the image it was started from.\n\nA Docker image is the packaged files and startup configuration for something you can run, like a recipe. A container is one running instance made from that image, like a dish made from that recipe.\n\nThe log is gone with it.",
+      "expectedRuleIds": ["opening-states-result"],
+      "shouldBlock": true
+    },
+    {
+      "id": "opening-states-result-cache-twin",
+      "tags": ["opening-order", "ai-ism"],
+      "text": "Later reads return the cache without opening the file.\n\nA cache is a fast local copy, like a notebook. Later reads return the cache (the notebook) without opening the file.",
+      "expectedRuleIds": ["opening-states-result"],
+      "shouldBlock": true
+    },
+    {
+      "id": "opening-defines-then-maps",
+      "tags": ["opening-order", "false-positive-counterexample"],
+      "text": "A Docker image is packaged files and startup configuration, like a recipe. A container is one running instance of that image, like a dish made from that recipe.\n\nReplace the container (the running dish) from the same image (the recipe). The log is gone.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "opening-leads-with-analog-before-kind",
+      "tags": ["opening-order", "ai-ism"],
+      "text": "This resembles handing a clerk a slip. A request is like a slip to a clerk.",
+      "expectedRuleIds": ["opening-leads-with-analog"],
+      "shouldBlock": true
+    },
+    {
+      "id": "opening-leads-with-analog-cashier-shape",
+      "tags": ["opening-order", "ai-ism"],
+      "text": "This resembles giving a cashier an instruction. A request is like an instruction to a cashier.",
+      "expectedRuleIds": ["opening-leads-with-analog"],
+      "shouldBlock": true
+    },
+    {
+      "id": "opening-skips-asked-subject-packet",
+      "tags": ["opening-order", "ai-ism"],
+      "question": "how the /c90373deff:explain skill works (hooks, packet, slices)",
+      "text": "A teaching packet is the injected guide for this turn. A teaching packet is like a recipe. /c90373deff:explain is a Claude Code skill.",
+      "expectedRuleIds": ["opening-skips-asked-subject"],
+      "shouldBlock": true
+    },
+    {
+      "id": "opening-skips-asked-subject-like-recipe",
+      "tags": ["opening-order", "ai-ism"],
+      "question": "how the /c90373deff:explain skill works (hooks, packet, slices)",
+      "text": "A teaching packet is like a recipe: it's the injected guide for this turn. This skill uses two hooks.",
+      "expectedRuleIds": ["opening-skips-asked-subject"],
+      "shouldBlock": true
+    },
+    {
+      "id": "opening-skips-asked-subject-cache-twin",
+      "tags": ["opening-order", "ai-ism"],
+      "question": "Explain how a cache returns a stored copy.",
+      "text": "A notebook is a paper copy you write once. A cache is a fast local copy of a file. Later reads return that copy.",
+      "expectedRuleIds": ["opening-skips-asked-subject"],
+      "shouldBlock": true
+    },
+    {
+      "id": "opening-names-asked-subject",
+      "tags": ["opening-order", "false-positive-counterexample"],
+      "question": "how the /c90373deff:explain skill works (hooks, packet, slices)",
+      "text": "/c90373deff:explain is a Claude Code skill. A teaching packet is the injected guide for this turn, like a recipe. The model writes from the packet (the recipe).",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "opening-defines-terms-then-story",
+      "tags": ["opening-order", "false-positive-counterexample"],
+      "text": "A race condition is two tasks reading and writing the same shared value. An increment is a read, then an add, then a write. Interleaving is a pause between those steps that lets the other task run.\n\n1. Task A reads 5.\n2. Task B reads 5.\n3. Both write 6.\n\nThe counter ends at 6. One increment is lost.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "opening-terms-then-numbered-walkthrough",
+      "tags": ["opening-order", "false-positive-counterexample"],
+      "text": "A physics simulation is a program that predicts motion in a game or robotics controller.\n\n- Timestep: the fixed slice of time each update advances.\n- Wall: a fixed obstacle the object can collide with.\n\n1. Object speed: 100 m/s.\n2. Displacement this timestep is 100 m/s × 0.0167 s = 1.667 m.\n3. Wall thickness: 0.1 m.\n\nThe next check is already past the wall. That miss is tunneling.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "ai-later-topic-leakage",
+      "tags": ["later-topic", "ai-ism"],
+      "text": "Feature leakage is when evaluation data shapes the model, so the test score looks better than performance on new data. The leaky mean includes the test rows, so the reported test score is inflated.\n\nThe fix is to refit inside each cross-validation fold, which is what a pipeline object in scikit-learn is built to enforce.",
+      "expectedRuleIds": ["ai-later-topic"],
+      "shouldBlock": true
+    },
+    {
+      "id": "ai-later-topic-race-twin",
+      "tags": ["later-topic", "ai-ism"],
+      "text": "A race condition is two tasks reading and writing the same shared value. The counter ends at 6. One increment is lost.\n\nThe usual next step is a lock-free compare-and-swap or a worker-pool, which many runtimes wrap automatically.",
+      "expectedRuleIds": ["ai-later-topic"],
+      "shouldBlock": true
+    },
+    {
+      "id": "ai-later-topic-ends-on-result",
+      "tags": ["later-topic", "false-positive-counterexample"],
+      "text": "Feature leakage is when evaluation data shapes the model, so the test score looks better than performance on new data. The leaky mean includes the test rows, so the reported test score is inflated.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "ai-later-topic-tunnel",
+      "tags": ["later-topic", "ai-ism"],
+      "text": "A physics simulation is a program that predicts motion in a game. A fixed timestep is an equal jump of time.\n\n- Timestep: the fixed slice of time each update advances.\n- Wall: a fixed obstacle.\n\nThe next check is already past the wall. That miss is tunneling.\n\n**Why a fixed timestep alone doesn't fix this**\n\n- **Smaller timestep**: shrink the jump until the object cannot pass the wall in one step.\n- **Continuous (swept) collision detection**: check the whole path and stop at the first surface.",
+      "expectedRuleIds": ["ai-later-topic"],
+      "shouldBlock": true
+    },
+    {
+      "id": "ai-later-topic-ends-on-tunnel",
+      "tags": ["later-topic", "false-positive-counterexample"],
+      "text": "A physics simulation is a program that predicts motion in a game. A fixed timestep is an equal jump of time.\n\n- Timestep: the fixed slice of time each update advances.\n- Wall: a fixed obstacle.\n\nThe next timestep check is already past the wall. That miss is tunneling.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "opening-skips-domain-leakage",
+      "tags": ["opening-order", "ai-ism"],
+      "text": "Feature leakage is when information that shouldn't be available yet sneaks into the process that builds the model. The score on the test set looks better than the score on new data.\n\n- Training data: the rows the model learns from.\n- Feature: an input value the model uses to predict.\n\nThe leaky feature mean on the training data includes the test rows, so the reported test score is inflated.",
+      "expectedRuleIds": ["opening-skips-domain"],
+      "shouldBlock": true
+    },
+    {
+      "id": "opening-skips-domain-cache-twin",
+      "tags": ["opening-order", "ai-ism"],
+      "text": "Cache invalidation is when the stored value is no longer the truth. Later reads can return stale data.\n\n- Cache: the stored copy.\n- Invalidation: marking that copy unusable.\n\nCache invalidation makes the next read open the file again.",
+      "expectedRuleIds": ["opening-skips-domain"],
+      "shouldBlock": true
+    },
+    {
+      "id": "opening-places-domain-then-terms",
+      "tags": ["opening-order", "false-positive-counterexample"],
+      "text": "When you train a machine-learning model to predict a house price, a feature is an input such as the house's size. Feature leakage is when evaluation data shapes that training, so the test score looks better than performance on new houses.\n\n- Training rows: the examples the model learns from.\n- Test rows: held-out examples used only to score.\n\nThe training rows are 1.0, 1.2, and 1.4.\nTheir sum is 3.6.\nThe training mean is 3.6 / 3 = 1.2.\nThe leaky mean includes the test rows, so the reported test score is inflated.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "empty-setup-colon-label",
+      "tags": ["empty-setup", "ai-ism"],
+      "text": "A race condition is two tasks reading and writing the same shared value. The key fact: both write 6. One increment is lost.",
+      "expectedRuleIds": ["empty-setup-sentence"],
+      "shouldBlock": true
+    },
+    {
+      "id": "unnamed-demonstrative-copy",
+      "tags": ["named-referent", "ai-ism"],
+      "text": "A protocol moves data between two programs. It delivers that data as one stream.",
+      "expectedRuleIds": ["unnamed-demonstrative"],
+      "shouldBlock": true
+    },
+    {
+      "id": "named-demonstrative-after-literal",
+      "tags": ["named-referent", "false-positive-counterexample"],
+      "text": "A sender calls write(\"HELLO\") then write(\"WORLD\"). Those writes can arrive as one HELLOWORLD read. The application has to mark the boundary.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "unused-term-lock",
+      "tags": ["named-referent", "ai-ism"],
+      "text": "A race condition is two tasks reading and writing the same shared value.\n\n- Increment: a read, then an add, then a write.\n- Lock: a token that only one task may hold.\n\nBoth tasks write 6. One increment is lost.",
+      "expectedRuleIds": ["unused-term"],
+      "shouldBlock": true
+    },
+    {
+      "id": "empty-setup-subject-label",
+      "tags": ["empty-setup", "ai-ism"],
+      "text": "The topic is cache invalidation: the stored copy is stale. Later reads open the file again.",
+      "expectedRuleIds": ["empty-setup-sentence"],
+      "shouldBlock": true
+    },
+    {
+      "id": "empty-setup-need-pieces",
+      "tags": ["empty-setup", "ai-ism"],
+      "text": "A race condition is two tasks reading the same shared value. To see why, you need three more pieces, each defined before it's used:\n\n- Increment: a read, then an add, then a write.\n\nBoth write 6. One increment is lost.",
+      "expectedRuleIds": ["empty-setup-sentence"],
+      "shouldBlock": true
+    },
+    {
+      "id": "kind-names-subject-without-article",
+      "tags": ["opening-order", "false-positive-counterexample"],
+      "text": "Contact bounce is metal contacts striking more than once. One press is logged as several presses.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "named-demonstrative-after-article",
+      "tags": ["named-referent", "false-positive-counterexample"],
+      "text": "The program ignores further pin changes for a short window after the first change. That window trades speed for accuracy.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "named-demonstrative-just-named-slices",
+      "tags": ["named-referent", "false-positive-counterexample"],
+      "text": "A slice is one topic file inside a packet. inject-guides attached two slices: one for writing rules, one for this skill. Those slices arrived as context before the answer was written.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "dropped-analog-cache-twin",
+      "tags": ["analog-binding", "ai-ism"],
+      "text": "A cache is a fast local copy, like a notebook. Later reads return the cache without opening the file.",
+      "expectedRuleIds": ["dropped-analog"],
+      "shouldBlock": true
+    },
+    {
+      "id": "kept-analog-parentheticals",
+      "tags": ["analog-binding", "false-positive-counterexample"],
+      "text": "A cache is a fast local copy, like a notebook. Later reads return the cache (the notebook) without opening the file.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "paren-before-mapping",
+      "tags": ["analog-binding", "ai-ism"],
+      "text": "A cache (the notebook) is a fast local copy. Later reads return the cache (the notebook) without opening the file.",
+      "expectedRuleIds": ["dropped-analog"],
+      "shouldBlock": true
+    },
+    {
+      "id": "slice-binding-dropped",
+      "tags": ["analog-binding", "ai-ism"],
+      "bindings": [{"term": "image", "analog": "recipe"}],
+      "text": "A Docker container is a running copy of packaged files. Writing notes on a hotel whiteboard, then checking into a cleaned room. You start a container from an image. The log is gone.",
+      "expectedRuleIds": ["dropped-analog"],
+      "shouldBlock": true
+    },
+    {
+      "id": "acronym-expansion-not-analog",
+      "tags": ["analog-binding", "false-positive-counterexample"],
+      "text": "A GPU (graphics processing unit) is a chip. The GPU adds each pair in its own thread.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "copula-analog-then-bare",
+      "tags": ["analog-binding", "ai-ism"],
+      "text": "A cache is the notebook. Later reads return the cache without opening the file.",
+      "expectedRuleIds": ["dropped-analog"],
+      "shouldBlock": true
+    },
+    {
+      "id": "possessive-analog-stamp",
+      "tags": ["analog-binding", "false-positive-counterexample"],
+      "bindings": [{"term": "cache", "analog": "notebook"}],
+      "text": "A cache is a fast local copy, like a notebook. Later reads return the cache's (the notebook's) copy.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "shortened-analog-remnant",
+      "tags": ["analog-binding", "ai-ism"],
+      "bindings": [{"term": "container", "analog": "running dish"}, {"term": "image", "analog": "recipe"}],
+      "text": "A Docker image is packaged files and startup configuration, like a recipe. A container is one running instance of that image, like a dish made from that recipe.\n\nA write goes in the container (the dish), not the image (the recipe). Replace the containers (the dishes). The log is gone.",
+      "expectedRuleIds": ["dropped-analog"],
+      "shouldBlock": true
+    },
+    {
+      "id": "kept-full-analog-noun-phrase",
+      "tags": ["analog-binding", "false-positive-counterexample"],
+      "bindings": [{"term": "container", "analog": "running dish"}, {"term": "image", "analog": "recipe"}],
+      "text": "A Docker image is packaged files and startup configuration, like a recipe. A container is one running instance of that image, like a dish made from that recipe.\n\nA write goes in the container (the running dish), not the image (the recipe). Replace the containers (the running dishes). The log is gone.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
+    },
+    {
+      "id": "missing-article-last-use",
+      "tags": ["analog-binding", "ai-ism"],
+      "text": "A cache is a fast local copy, like a notebook. Later reads return the cache (notebook) without opening the file.",
+      "expectedRuleIds": ["dropped-analog"],
+      "shouldBlock": true
+    },
+    {
+      "id": "ai-later-topic-called-fix",
+      "tags": ["later-topic", "ai-ism"],
+      "text": "A race condition is two tasks reading and writing the same shared value. The counter ends at 6. One increment is lost.\n\nThe fix, called locking, is to hold a token so only one task writes.",
+      "expectedRuleIds": ["ai-later-topic"],
+      "shouldBlock": true
+    }
+  ]
+}

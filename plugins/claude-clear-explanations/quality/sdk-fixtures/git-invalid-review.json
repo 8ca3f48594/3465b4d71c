@@ -1,0 +1,44 @@
+{
+  "id": "git-invalid-review-2026-09-17",
+  "request": {
+    "question": "Explain Git.",
+    "sources": [
+      {
+        "id": "git-history",
+        "text": "Git records project snapshots in commits. Ordinary new commits preserve earlier history. Saving a file in an editor does not itself make a Git commit."
+      }
+    ]
+  },
+  "calls": [
+    {
+      "stage": "draft",
+      "output": {
+        "draft": "Git keeps selected versions of a project as commits.",
+        "methods": ["definition"],
+        "topics": ["git-version-control"]
+      }
+    },
+    {
+      "stage": "rewrite",
+      "output": {
+        "answer": "Git is a tool that keeps selected versions of a project so you can inspect an earlier version or restore its file contents later. Saving a file in your editor does not make a commit, and Git does not automatically record every edit.",
+        "corrections": []
+      }
+    },
+    {
+      "stage": "verify",
+      "output": {
+        "accepted": true,
+        "findings": [],
+        "checkedSourceIds": ["git-history"],
+        "styleResolutions": [
+          {
+            "ruleId": "invented-checker-rule",
+            "legitimate": true,
+            "reason": "Invented identifier from the 2026-09-17 review call."
+          }
+        ]
+      }
+    }
+  ]
+}

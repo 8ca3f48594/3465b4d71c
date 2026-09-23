@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "pairs": [
+    {
+      "id": "git-first-introduction",
+      "question": "Explain Git.",
+      "leftCondition": "ideal-codex-direct",
+      "rightCondition": "native-beginner-records-every-change",
+      "criteria": [
+        "opening-identifies-purpose",
+        "one-example-to-useful-result",
+        "commit-not-editor-save",
+        "no-adjacent-topic-tour"
+      ],
+      "left": "Git is a tool that keeps selected versions of a project so you can inspect an earlier version or restore its file contents later. It records a snapshot of the project each time you deliberately make a record called a commit. Saving a file in your editor does not make a commit, and Git does not automatically record every edit.\n\nImagine you are making a digital painting. You finish the outline, prepare that version for Git to record, and make a commit. Later, you add a blue sky and prepare and commit that version too. The blue sky commit keeps the earlier outline in the project's history.",
+      "right": "Git tracks your painting so every change was recorded as you worked, including ordinary editor saves. You can later recover any brushstroke because the history is complete."
+    },
+    {
+      "id": "git-known-commits",
+      "question": "What do Git branches add? Keep the digital painting example.",
+      "audience": "I understand saving a file and making a commit.",
+      "leftCondition": "ideal-codex-focused",
+      "rightCondition": "native-overwrite-history",
+      "criteria": [
+        "accept-stated-commit-knowledge",
+        "switch-before-commit",
+        "branches-not-required-for-history"
+      ],
+      "left": "Git branches let you keep developing the painting in two directions, such as a daytime scene and a night scene. Earlier commits already remain in history, so what branches add is a way to continue each direction separately. Create a branch named night at the current commit, then switch to night before you darken the sky and commit.",
+      "right": "After you commit the night sky, a new commit on that branch would overwrite an earlier committed version of the daytime painting. Branches are needed to keep the earlier version."
+    }
+  ]
+}

@@ -1,0 +1,383 @@
+{
+  "version": 1,
+  "general": [
+    {
+      "id": "anti-slop",
+      "path": "general/anti-slop.md"
+    },
+    {
+      "id": "clear-explanation",
+      "path": "general/clear-explanation.md"
+    }
+  ],
+  "packet": [
+    {
+      "id": "packet-method",
+      "path": "general/packet.md"
+    }
+  ],
+  "guides": [
+    {
+      "id": "definition",
+      "kind": "method",
+      "description": "Define a concept and explain its useful boundaries.",
+      "path": "methods/definition.md"
+    },
+    {
+      "id": "causal-explanation",
+      "kind": "method",
+      "description": "Explain why an observed result occurs from supported causes.",
+      "path": "methods/causal-explanation.md"
+    },
+    {
+      "id": "execution-walkthrough",
+      "kind": "method",
+      "description": "Trace inputs, control flow, state changes, and outputs.",
+      "path": "methods/execution-walkthrough.md"
+    },
+    {
+      "id": "diagnosis",
+      "kind": "method",
+      "description": "Connect a symptom to evidence, a cause, and a discriminating test.",
+      "path": "methods/diagnosis.md"
+    },
+    {
+      "id": "comparison",
+      "kind": "method",
+      "description": "Compare alternatives under shared decision criteria.",
+      "path": "methods/comparison.md"
+    },
+    {
+      "id": "worked-tutorial",
+      "kind": "method",
+      "description": "Teach a small task with intermediate results and a success check.",
+      "path": "methods/worked-tutorial.md"
+    },
+    {
+      "id": "programming-types",
+      "kind": "topic",
+      "description": "Explain values, expressions, control flow, assignment, and types.",
+      "path": "topics/programming-types.md",
+      "terms": ["type", "types", "expression", "assignment", "control flow"]
+    },
+    {
+      "id": "algorithms-data",
+      "kind": "topic",
+      "description": "Choose and explain a data structure or algorithm for a concrete operation.",
+      "path": "topics/algorithms-data.md",
+      "terms": ["data structure", "algorithm", "bloom", "hash table", "binary search"]
+    },
+    {
+      "id": "architecture-design",
+      "kind": "topic",
+      "description": "Explain component responsibilities, dependencies, interfaces, and design tradeoffs.",
+      "path": "topics/architecture-design.md",
+      "terms": ["architecture", "interface", "dependency", "design tradeoff"]
+    },
+    {
+      "id": "concurrency-async",
+      "kind": "topic",
+      "description": "Explain waiting, scheduling, concurrent tasks, races, and cancellation.",
+      "path": "topics/concurrency-async.md",
+      "slices": [
+        {
+          "id": "async-tasks",
+          "path": "topics/concurrency/async-tasks.md",
+          "terms": ["asyncio", "await", "coroutine", "create_task", "async task"]
+        },
+        {
+          "id": "shared-races",
+          "path": "topics/concurrency/shared-races.md",
+          "terms": ["race", "races", "lost increment", "shared state", "interleaving"]
+        },
+        {
+          "id": "compare-swap",
+          "path": "topics/concurrency/compare-swap.md",
+          "terms": ["aba", "compare-and-swap", "compare and swap", "recycled pointer", "lock-free"]
+        }
+      ]
+    },
+    {
+      "id": "testing-debugging",
+      "kind": "topic",
+      "description": "Explain a failing test, a defect diagnosis, or the evidence needed to validate a fix.",
+      "path": "topics/testing-debugging.md",
+      "terms": ["failing test", "unit test", "debugger", "stack trace", "regression"]
+    },
+    {
+      "id": "frontend-state",
+      "kind": "topic",
+      "description": "Explain UI events, state updates, rendering, and displayed results.",
+      "path": "topics/frontend-state.md",
+      "terms": ["ui event", "react state", "dom", "component state"]
+    },
+    {
+      "id": "backend-apis",
+      "kind": "topic",
+      "description": "Explain request handling, API contracts, HTTP semantics, and retries.",
+      "path": "topics/backend-apis.md",
+      "terms": ["http", "api", "rest", "retry", "request handler"]
+    },
+    {
+      "id": "databases-storage",
+      "kind": "topic",
+      "description": "Explain records, transactions, indexes, durability, and storage choices.",
+      "path": "topics/databases-storage.md",
+      "terms": ["database", "databases", "write-ahead", "transaction", "sql"]
+    },
+    {
+      "id": "networks-protocols",
+      "kind": "topic",
+      "description": "Explain connections, message delivery, latency, and protocol layers.",
+      "path": "topics/networks-protocols.md",
+      "terms": ["tcp", "udp", "protocol", "latency", "packet loss"],
+      "slices": [
+        {
+          "id": "tcp-stream",
+          "path": "topics/networks/tcp-stream.md",
+          "terms": ["tcp", "byte stream", "two writes", "two reads"]
+        }
+      ]
+    },
+    {
+      "id": "authentication-security",
+      "kind": "topic",
+      "description": "Explain identity checks, permissions, trust boundaries, and access decisions.",
+      "path": "topics/authentication-security.md",
+      "terms": ["authentication", "authorization", "permission", "trust boundary"]
+    },
+    {
+      "id": "cloud-hosting",
+      "kind": "topic",
+      "description": "Explain hosting choices and who operates each part of a system.",
+      "path": "topics/cloud-hosting.md",
+      "terms": ["cloud", "hosting", "vpc", "availability zone"]
+    },
+    {
+      "id": "containers-deployment",
+      "kind": "topic",
+      "description": "Explain images, running containers, configuration, and deployment changes.",
+      "path": "topics/containers-deployment.md",
+      "terms": ["container", "docker", "kubernetes", "image layer", "writable layer"],
+      "slices": [
+        {
+          "id": "containers-writable",
+          "path": "topics/containers/writable.md",
+          "terms": ["writable layer", "replace the container", "replacing a"]
+        }
+      ]
+    },
+    {
+      "id": "git-version-control",
+      "kind": "topic",
+      "description": "Explain Git version control, repositories, commits, staging, branches, merges, conflicts, and GitHub distinctions. Includes a digital painting and selected snapshots example.",
+      "path": "topics/git-version-control.md",
+      "slices": [
+        {
+          "id": "git-purpose",
+          "path": "topics/git/purpose.md",
+          "terms": ["git", "version control", "explain git", "repository"]
+        },
+        {
+          "id": "git-commits",
+          "path": "topics/git/commits.md",
+          "terms": ["commit", "snapshot", "editor save", "recorded version"]
+        },
+        {
+          "id": "git-staging",
+          "path": "topics/git/staging.md",
+          "terms": ["stage", "staging", "git add", "prepared snapshot"]
+        },
+        {
+          "id": "git-branches",
+          "path": "topics/git/branches.md",
+          "terms": ["branch", "branches", "switch", "checkout", "night-scene", "daytime"]
+        },
+        {
+          "id": "git-merges",
+          "path": "topics/git/merges.md",
+          "terms": ["merge", "conflict", "combine", "github"]
+        }
+      ]
+    },
+    {
+      "id": "builds-ci",
+      "kind": "topic",
+      "description": "Explain build inputs, workflow triggers, jobs, tests, artifacts, and deployment gates.",
+      "path": "topics/builds-ci.md",
+      "terms": ["ci", "continuous integration", "build pipeline", "artifact"]
+    },
+    {
+      "id": "observability-incidents",
+      "kind": "topic",
+      "description": "Explain logs, metrics, traces, incident evidence, and operational diagnosis.",
+      "path": "topics/observability-incidents.md",
+      "terms": ["observability", "metrics", "distributed trace", "incident"]
+    },
+    {
+      "id": "scaling-costs",
+      "kind": "topic",
+      "description": "Explain capacity, bottlenecks, demand, and usage-based cost.",
+      "path": "topics/scaling-costs.md",
+      "terms": ["horizontal scaling", "capacity", "usage-based cost"]
+    },
+    {
+      "id": "cpus-gpus",
+      "kind": "topic",
+      "description": "Explain processor roles, parallel work, memory movement, and workload fit.",
+      "path": "topics/cpus-gpus.md",
+      "terms": ["gpu", "cuda", "simd", "graphics processor"]
+    },
+    {
+      "id": "memory-hardware",
+      "kind": "topic",
+      "description": "Explain RAM, persistent storage, caches, and the path a program uses to access data.",
+      "path": "topics/memory-hardware.md",
+      "terms": ["cache", "caches", "ram", "coherence", "mesi"]
+    },
+    {
+      "id": "operating-systems",
+      "kind": "topic",
+      "description": "Explain process state, scheduling, address spaces, and operating-system services.",
+      "path": "topics/operating-systems.md",
+      "terms": ["operating system", "kernel", "syscall", "virtual memory", "address space"]
+    },
+    {
+      "id": "performance-profiling",
+      "kind": "topic",
+      "description": "Explain measurement results, bottlenecks, latency, and proposed optimizations.",
+      "path": "topics/performance-profiling.md",
+      "terms": ["profiler", "profiling", "hot path", "benchmark"]
+    },
+    {
+      "id": "devices-embedded",
+      "kind": "topic",
+      "description": "Explain digital inputs, outputs, timing, resource limits, and interaction with physical devices.",
+      "path": "topics/devices-embedded.md",
+      "terms": ["embedded", "gpio", "microcontroller", "firmware", "bounce", "contact bounce"],
+      "slices": [
+        {
+          "id": "devices-bounce",
+          "path": "topics/devices/bounce.md",
+          "terms": ["bounce", "contact bounce", "button press", "contacts"]
+        }
+      ]
+    },
+    {
+      "id": "game-loops",
+      "kind": "topic",
+      "description": "Explain player input, update loops, game state, and visible behavior.",
+      "path": "topics/game-loops.md",
+      "terms": ["game loop", "player input", "tick rate"]
+    },
+    {
+      "id": "graphics-rendering",
+      "kind": "topic",
+      "description": "Explain how scene data becomes pixels, including geometry, shaders, and drawing state.",
+      "path": "topics/graphics-rendering.md",
+      "terms": ["graphics", "rendering", "depth buffer", "shader", "raster"]
+    },
+    {
+      "id": "physics-simulation",
+      "kind": "topic",
+      "description": "Explain simulated motion, collision behavior, fixed timesteps, and approximations.",
+      "path": "topics/physics-simulation.md",
+      "terms": ["physics simulation", "collision", "timestep", "rigid body"],
+      "slices": [
+        {
+          "id": "physics-tunnel",
+          "path": "topics/physics/tunnel.md",
+          "terms": ["tunnel", "tunneling", "timestep", "fixed timestep", "skip through", "wall"]
+        }
+      ]
+    },
+    {
+      "id": "machine-learning",
+      "kind": "topic",
+      "description": "Explain training, prediction, features, evaluation, and data leakage.",
+      "path": "topics/machine-learning.md",
+      "terms": ["training set", "model training", "feature leakage", "gradient"],
+      "slices": [
+        {
+          "id": "ml-leakage",
+          "path": "topics/ml/leakage.md",
+          "terms": ["leakage", "leak", "feature leakage", "test score", "scaler"]
+        },
+        {
+          "id": "ml-pipeline",
+          "path": "topics/ml/pipelines.md",
+          "terms": ["pipeline", "cross-validation", "cross validation", "scikit-learn"]
+        }
+      ]
+    },
+    {
+      "id": "language-models",
+      "kind": "topic",
+      "description": "Explain prompts, tool calls, structured output, evidence retrieval, and model evaluation.",
+      "path": "topics/language-models.md",
+      "terms": ["language model", "llm", "tool call", "prompt"]
+    },
+    {
+      "id": "learning-memory",
+      "kind": "topic",
+      "description": "Explain learning practices and memory findings relevant to understanding technical material.",
+      "path": "topics/learning-memory.md",
+      "terms": ["spaced repetition", "forgetting curve", "study practice", "human memory"]
+    },
+    {
+      "id": "attention-load",
+      "kind": "topic",
+      "description": "Explain how task demands and presentation can affect learning or comprehension.",
+      "path": "topics/attention-load.md",
+      "terms": ["cognitive load", "working memory", "attention"]
+    },
+    {
+      "id": "mental-models",
+      "kind": "topic",
+      "description": "Explain user expectations, interface behavior, and usability mismatches.",
+      "path": "topics/mental-models.md",
+      "terms": ["mental model", "usability", "affordance"]
+    },
+    {
+      "id": "motivation-habits",
+      "kind": "topic",
+      "description": "Explain behavior patterns, repeated actions, cues, and the limits of habit research.",
+      "path": "topics/motivation-habits.md",
+      "terms": ["habit", "cue", "motivation"]
+    },
+    {
+      "id": "teamwork-decisions",
+      "kind": "topic",
+      "description": "Explain collaboration, speaking up, decision evidence, and team learning.",
+      "path": "topics/teamwork-decisions.md",
+      "terms": ["team decision", "psychological safety", "collaboration"]
+    },
+    {
+      "id": "clear-explanations",
+      "kind": "topic",
+      "description": "Explain the clear-explanations skill, the injected teaching packet, inject-guides routing, and the Stop hook.",
+      "path": "topics/clear-explanations.md",
+      "slices": [
+        {
+          "id": "explain-skill",
+          "path": "topics/clear-explanations/explain-skill.md",
+          "terms": [
+            "clear-explanations",
+            "c90373deff",
+            "explain skill",
+            "this skill",
+            "this plugin",
+            "teaching packet",
+            "injected packet",
+            "always-on packet",
+            "inject-guides",
+            "userpromptsubmit",
+            "stop hook",
+            "plugin hook",
+            "plugin hooks"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "standard": "plugins/claude-clear-explanations/skills/explain/references/rubric.md",
+  "notes": "Ideal answers are the 2026-09-17 Codex samples. Rejected answers reconstruct documented native failures; they are not full transcripts.",
+  "cases": [
+    {
+      "id": "git-first-introduction",
+      "question": "Explain Git.",
+      "guideIds": ["definition", "git-version-control"],
+      "expectedSlices": ["git-purpose", "git-commits"],
+      "forbiddenSliceIds": ["git-staging", "git-branches", "git-merges"],
+      "criteria": [
+        "opening-identifies-purpose",
+        "one-example-to-useful-result",
+        "commit-not-editor-save",
+        "new-commits-keep-history",
+        "no-adjacent-topic-tour",
+        "no-ai-isms"
+      ],
+      "idealAnswer": "Git is a tool that keeps selected versions of a project so you can inspect an earlier version or restore its file contents later. It records a snapshot of the project each time you deliberately make a record called a commit. Saving a file in your editor does not make a commit, and Git does not automatically record every edit.\n\nImagine you are making a digital painting. You finish the outline, prepare that version for Git to record, and make a commit. Later, you add a blue sky and prepare and commit that version too. The blue sky commit keeps the earlier outline in the project's history. If you then try an orange sky and prefer the blue one, you can inspect or restore the recorded blue sky version.\n\nThe useful distinction is between the file you are currently editing and the versions you have deliberately recorded. New commits normally add to the history while keeping earlier commits available. That lets you keep developing the painting without losing its recorded stages, but it does not guarantee that an unrecorded edit can be recovered.",
+      "rejectedAnswers": [
+        {
+          "id": "native-beginner-records-every-change",
+          "source": "plugins/claude-clear-explanations/docs/git-beginner-test.md",
+          "defects": ["git-records-every-edit"],
+          "text": "Git tracks your painting so every change was recorded as you worked, including ordinary editor saves."
+        },
+        {
+          "id": "native-intro-topic-menu",
+          "source": "plugins/claude-clear-explanations/docs/red-native-closer.md",
+          "defects": ["ai-topic-menu", "offer-to-continue"],
+          "text": "Git is version control software: it lets you save specific versions of a project so you can look back at an earlier version or restore its contents later, without losing your current work.\n\nSaving a file in your editor is not the same as recording a version in Git.\n\nFrom here, there's more to Git (like how you prepare a version before saving it, or how to work on separate versions in parallel, or how to share versions with others). Let me know if you want to go into any of those next."
+        }
+      ]
+    },
+    {
+      "id": "git-known-commits",
+      "question": "What do Git branches add? Keep the digital painting example.",
+      "audience": "I understand saving a file and making a commit. I understand that earlier committed versions remain in history. We have been using a hypothetical digital painting with versions I deliberately keep.",
+      "guideIds": ["definition", "git-version-control"],
+      "expectedSlices": ["git-purpose", "git-branches"],
+      "forbiddenSliceIds": ["git-commits", "git-staging", "git-merges"],
+      "criteria": [
+        "accept-stated-commit-knowledge",
+        "switch-before-commit",
+        "branches-not-required-for-history",
+        "painting-stays-hypothetical"
+      ],
+      "idealAnswer": "Git branches let you keep developing the painting in two directions, such as a daytime scene and a night scene. Each direction has a name that identifies its latest commit. A branch is that movable name. Earlier commits already remain in history, so what branches add is a way to continue each direction separately.\n\nSuppose the daytime painting is committed on a branch named daytime, with no uncommitted changes. Create a branch named night at that same commit, then switch to night. Creating it alone does not switch branches. Both names initially identify the same painting. Darken the sky and commit the change. The night branch now names the new commit, while daytime still names the original commit.",
+      "rejectedAnswers": [
+        {
+          "id": "native-overwrite-history",
+          "source": "plugins/claude-clear-explanations/docs/git-known-understanding-test.md",
+          "defects": ["git-commit-overwrites-history"],
+          "text": "After you commit the night sky, a new commit on that branch would overwrite an earlier committed version of the daytime painting."
+        },
+        {
+          "id": "native-automatic-image-merge",
+          "source": "plugins/claude-clear-explanations/docs/git-framework-feedback-test.md",
+          "defects": ["git-automatic-image-merge"],
+          "text": "When both branches change the painting, Git will automatically merge the two image files into one picture."
+        },
+        {
+          "id": "native-create-without-switch",
+          "source": "plugins/claude-clear-explanations/docs/git-framework-feedback-test.md",
+          "defects": ["git-create-branch-skips-switch"],
+          "text": "Create a night-scene branch and commit the change to darken the sky."
+        },
+        {
+          "id": "native-opening-hides-subject",
+          "source": "plugins/claude-clear-explanations/docs/git-framework-feedback-test.md",
+          "defects": ["git-opening-hides-subject"],
+          "text": "Suppose you want to keep developing a daytime painting and also try a night scene. Start with the recorded daytime version. Create a night-scene branch and switch to it. Darken the sky and commit the change."
+        }
+      ]
+    }
+  ]
+}

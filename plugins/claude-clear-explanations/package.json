@@ -1,0 +1,23 @@
+{
+  "name": "claude-clear-explanations",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "check": "node scripts/check-source.mjs",
+    "check:prompts": "node scripts/check-prompts.mjs",
+    "explain": "node scripts/explain.mjs",
+    "eval:prepare": "node scripts/prepare-comparison.mjs",
+    "eval:checker": "node scripts/run-checker-evals.mjs --cases quality/checker-cases.json",
+    "eval:preference": "node scripts/prepare-preference.mjs quality/preference-pairs.json .artifacts/preference",
+    "eval:packet": "node scripts/inject-guides.mjs --question",
+    "eval:score": "node scripts/score-explanation.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/claude-agent-sdk": "0.3.273"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
