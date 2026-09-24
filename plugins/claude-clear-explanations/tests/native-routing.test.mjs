@@ -395,11 +395,11 @@ test('a Docker writable-layer question loads the replace slice and stops on the 
   assert.deepEqual(guide.sliceIds, ['containers-writable']);
   assert.match(guide.text, /writable layer/i);
   assert.match(guide.text, /like a recipe/);
-  assert.match(guide.text, /like a dish/);
+  assert.match(guide.text, /like a running dish/);
   assert.match(guide.text, /image \(the recipe\)/);
   assert.match(guide.text, /container \(the running dish\)/);
   assert.ok(guide.text.search(/like a recipe/) < guide.text.search(/image \(the recipe\)/));
-  assert.ok(guide.text.search(/like a dish/) < guide.text.search(/container \(the running dish\)/));
+  assert.ok(guide.text.search(/like a running dish/) < guide.text.search(/container \(the running dish\)/));
   assert.match(guide.text, /The log is gone/i);
   assert.doesNotMatch(guide.text, /volume|bind-mount/i);
   assert.equal(analyzeExplanation(guide.text).shouldBlock, false);

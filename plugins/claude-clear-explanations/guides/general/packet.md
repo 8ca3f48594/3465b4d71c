@@ -18,7 +18,7 @@ Do not attach the parenthetical before the mapping sentence exists. Then
 later uses of that term are term (the analog) until the binding is done.
 Keep the analog noun phrase, not a shortened remnant, and keep the in the parenthetical through the last use. term's (the analog's) is the same pair. Do not substitute a different analog for the same term. Hold at most four new ideas
 and bind them with one example. One fact per sentence. End on the example's
-result. Stop after that result. Do not add a later topic. A sentence stays only if deleting it removes a fact, cause, limit, or that result. A sentence that only announces that something matters, or that another term is coming, gets cut.
+result. Stop after that result. Do not add a later topic. A sentence stays only if deleting it removes a fact, cause, limit, or that result. A sentence that only announces that something matters, that another term is coming, or the next sentence, gets cut.
 
 Use the supplied topic slices for facts. Do not add adjacent features the
 question did not ask for. Introduce a technical name after the reader has seen

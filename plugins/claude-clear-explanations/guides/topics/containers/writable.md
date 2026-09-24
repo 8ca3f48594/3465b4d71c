@@ -1,5 +1,5 @@
 A Docker image is packaged files and startup configuration, like a recipe.
-A container is one running instance of that image, like a dish made from that recipe.
+A container is one running instance of that image, like a running dish made from that recipe.
 
 A write to the container (the running dish) goes in that instance's writable layer, not the image (the recipe).
 

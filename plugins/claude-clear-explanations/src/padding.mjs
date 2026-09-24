@@ -77,6 +77,13 @@ function setupLabel(sentence) {
   return trailing ? trailing[1].trim() : '';
 }
 
+function announcesNextSentence(sentence) {
+  const trimmed = sentence.trim();
+  if (/[`\d"]/.test(trimmed) || /[“”]/.test(trimmed)) return false;
+  if (/^to\b/i.test(trimmed)) return false;
+  return /^[^:\n]{1,160}:\s*$/.test(trimmed);
+}
+
 function loneAnnouncementLabel(sentence) {
   const trailing = String(sentence).match(/^([^:]{1,80}):\s*$/);
   if (!trailing) return false;
@@ -95,7 +102,7 @@ export function isEmptySetupSentence(sentence) {
   if (!trimmed || /^#{1,6}(?:\s|$)/.test(trimmed) || /^[-*]\s*$/.test(trimmed) || walkthroughChrome(trimmed)) {
     return false;
   }
-  if (loneAnnouncementLabel(trimmed)) return true;
+  if (announcesNextSentence(trimmed) || loneAnnouncementLabel(trimmed)) return true;
   const label = setupLabel(trimmed);
   const labelCap = /:$/.test(trimmed) ? 16 : 8;
   if (label && tokens(label).length >= 2 && (isEmptyWordRun(label, labelCap) || isNameOnlyAfterCopula(label))) {

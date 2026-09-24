@@ -21,7 +21,7 @@ function analogKey(analog) {
 const RELATION = new Set([
   'this', 'that', 'these', 'those', 'which', 'who', 'whom', 'whose',
   'from', 'for', 'with', 'by', 'to', 'of', 'into', 'onto', 'on', 'in',
-  'at', 'as', 'than', 'and', 'or',
+  'at', 'as', 'than', 'and', 'or', 'made',
 ]);
 
 function analogFromInner(inner) {
@@ -104,23 +104,40 @@ function pairsFromParentheticals(source) {
   return pairs;
 }
 
+const LIKE_VERB = '(?:is|are|works)';
+const LIKE_ANALOG = 'like (?:a |an |the )([a-z][a-z-]{2,}(?: [a-z][a-z-]{2,}){0,2})';
+
 function pushLikePair(pairs, termWords, analogWord, from, at) {
   const words = String(termWords).toLowerCase().split(/\s+/).filter(Boolean);
   const term = words[words.length - 1];
-  const analog = analogKey(analogWord);
+  const analog = analogFromInner(analogWord);
   if (!term || SKIP_TERM.has(term) || !analog) return;
   pairs.push({term, analog, from, at});
 }
 
 function pairsFromLikeMaps(source) {
   const pairs = [];
-  const head = /\b(?:A|An|The) ((?:[A-Za-z][A-Za-z-]{2,} ){0,3}[A-Za-z][A-Za-z-]{2,}) (?:is|are)\b[^.!?\n]{0,160}? like (?:a |an |the )([a-z][a-z-]{2,})/gi;
+  const head = new RegExp(
+    `\\b(?:A|An|The) ((?:[A-Za-z][A-Za-z-]{2,} ){0,3}[A-Za-z][A-Za-z-]{2,}) ${LIKE_VERB}\\b[^.!?\\n]{0,160}? ${LIKE_ANALOG}`,
+    'gi',
+  );
   for (const match of source.matchAll(head)) {
     pushLikePair(pairs, match[1], match[2], match.index, match.index + match[0].length);
   }
-  const coordinated = /\b(?:and|or) (?:a |an |the )?((?:[A-Za-z][A-Za-z-]{2,} ){0,3}[A-Za-z][A-Za-z-]{2,}) (?:is|are) like (?:a |an |the )([a-z][a-z-]{2,})/gi;
+  const coordinated = new RegExp(
+    `\\b(?:and|or) (?:a |an |the )?((?:[A-Za-z][A-Za-z-]{2,} ){0,3}[A-Za-z][A-Za-z-]{2,}) ${LIKE_VERB} ${LIKE_ANALOG}`,
+    'gi',
+  );
   for (const match of source.matchAll(coordinated)) {
     pushLikePair(pairs, match[1], match[2], match.index, match.index + match[0].length);
+  }
+  const pronoun = new RegExp(`\\bIt(?:'s|’s| is| works) ${LIKE_ANALOG}`, 'gi');
+  for (const match of source.matchAll(pronoun)) {
+    const before = source.slice(0, match.index).replace(/\*\*/g, '');
+    const subjects = [...before.matchAll(/\b(?:A|An|The) ((?:[A-Za-z][A-Za-z-]{2,} ){0,3}[A-Za-z][A-Za-z-]{2,}) (?:is|are)\b/gi)];
+    const subject = subjects[subjects.length - 1];
+    if (!subject) continue;
+    pushLikePair(pairs, subject[1], match[1], match.index, match.index + match[0].length);
   }
   return pairs;
 }

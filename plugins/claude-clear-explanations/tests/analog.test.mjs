@@ -213,6 +213,61 @@ test('a coordinated like-sentence maps both terms, and a shortened remnant still
   assert.match(hook.reason, /the new dish/);
 });
 
+test('works like and a following it-is-like sentence are the same mapping', () => {
+  const kept = [
+    'The teaching packet works like a recipe.',
+    'The running answer is like a dish.',
+    'The model writes the answer (the dish) from the packet (the recipe).',
+  ].join(' ');
+  const bindings = [
+    {term: 'packet', analog: 'recipe'},
+    {term: 'answer', analog: 'dish'},
+  ];
+  assert.deepEqual(detectDroppedAnalog(kept, bindings), []);
+  const pronoun = [
+    'A container is one running instance made from an image.',
+    "It's like a running dish.",
+    'Replace the container (the running dish). The log is gone.',
+  ].join(' ');
+  assert.deepEqual(detectDroppedAnalog(pronoun, [{term: 'container', analog: 'running dish'}]), []);
+  const shortened = [
+    'A container is one running instance made from an image.',
+    "It's like a dish.",
+    'Replace the container (the dish). The log is gone.',
+  ].join(' ');
+  const dropped = detectDroppedAnalog(shortened, [{term: 'container', analog: 'running dish'}]);
+  assert.ok(dropped.some(item => /shortened remnant/.test(item.reason)));
+  assert.equal(dropped.some(item => /before any parenthetical/.test(item.reason)), false);
+});
+
+test('a revision still stands when a shortened analog or a new announcement remains', () => {
+  const question = 'Explain why replacing a Docker container does not keep files written only to its writable layer.';
+  const revision = [
+    'A Docker container is one running instance of an application.',
+    'Here are the terms involved:',
+    "Here's the sequence that causes the loss:",
+    'An image is like a recipe, and a container is like a running dish.',
+    'The new container (the dish) gets an empty layer.',
+  ].join('\n');
+  const first = evaluateStopHook({
+    stop_hook_active: false,
+    last_assistant_message: revision,
+    bindings: sliceBindings,
+    prompt: question,
+  });
+  assert.equal(first.decision, 'block');
+  assert.match(first.reason, /Here are the terms involved:/);
+  assert.match(first.reason, /Here's the sequence that causes the loss:/);
+  assert.match(first.reason, /shortened remnant/);
+  const again = evaluateStopHook({
+    stop_hook_active: true,
+    last_assistant_message: revision,
+    bindings: sliceBindings,
+    prompt: question,
+  });
+  assert.deepEqual(again, {});
+});
+
 test('collectAnalogPairs reads article parentheticals from a slice', () => {
   const slice = [
     'A Docker image is packaged files, like a recipe. A container is one instance, like a dish.',

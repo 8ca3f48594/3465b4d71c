@@ -179,6 +179,24 @@ test('a leftover-empty line that only announces terms are coming fails', () => {
   assert.equal(revision.decision, 'block');
 });
 
+test('a colon sentence that only announces the next sentence is cut', () => {
+  const live = [
+    'A container is one running instance of an image.',
+    "Here's what's involved:",
+    "Here's the sequence that causes the loss:",
+    'The log is gone.',
+  ].join('\n');
+  const kept = [
+    'A container is one running instance of an image.',
+    'The log is gone.',
+  ].join('\n');
+  const report = analyzeExplanation(live);
+  assert.ok(report.findings.some(item => item.ruleId === 'empty-setup-sentence' && /what.s involved/i.test(item.evidence)));
+  assert.ok(report.findings.some(item => item.ruleId === 'empty-setup-sentence' && /sequence that causes the loss/i.test(item.evidence)));
+  assert.equal(analyzeExplanation(kept).findings.some(item => item.ruleId === 'empty-setup-sentence'), false);
+  assert.equal(analyzeExplanation('Example: both write 6. One increment is lost.').findings.some(item => item.ruleId === 'empty-setup-sentence'), false);
+});
+
 test('a colon line that only names the upcoming piece is an empty announcement', () => {
   const live = [
     'A container is one running instance of an image.',

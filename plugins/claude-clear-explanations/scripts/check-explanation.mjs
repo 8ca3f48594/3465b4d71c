@@ -201,12 +201,25 @@ function quoteWindow(text, item) {
   const span = item?.span;
   if (!span || !Number.isInteger(span.start) || !Number.isInteger(span.end)) {
     return typeof item?.evidence === "string"
-      ? item.evidence.replace(/\s+/g, " ").trim().slice(0, 140)
+      ? item.evidence.replace(/\s+/g, " ").trim().slice(0, 180)
       : "";
   }
-  const start = Math.max(0, span.start - 24);
-  const end = Math.min(text.length, span.end + 24);
-  return text.slice(start, end).replace(/\s+/g, " ").trim().slice(0, 140);
+  let start = span.start;
+  while (start > 0) {
+    const prev = text[start - 1];
+    if (prev === "\n" || ((prev === "." || prev === "!" || prev === "?") && /\s/.test(text[start] ?? ""))) break;
+    start -= 1;
+  }
+  let end = Math.max(span.end, start);
+  while (end < text.length) {
+    const ch = text[end];
+    if (ch === "\n" || ch === "." || ch === "!" || ch === "?" || ch === ":") {
+      end += 1;
+      break;
+    }
+    end += 1;
+  }
+  return text.slice(start, end).replace(/\s+/g, " ").trim().slice(0, 180);
 }
 
 function stopInstructions(text, findings) {
