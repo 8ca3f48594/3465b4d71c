@@ -191,6 +191,49 @@ function resolveQuestion(input) {
   return readTranscriptQuestion(input.transcript_path);
 }
 
+const QUOTED_FIRST = new Set([
+  "empty-setup-sentence",
+  "dropped-analog",
+  "opening-skips-asked-subject",
+]);
+
+function quoteWindow(text, item) {
+  const span = item?.span;
+  if (!span || !Number.isInteger(span.start) || !Number.isInteger(span.end)) {
+    return typeof item?.evidence === "string"
+      ? item.evidence.replace(/\s+/g, " ").trim().slice(0, 140)
+      : "";
+  }
+  const start = Math.max(0, span.start - 24);
+  const end = Math.min(text.length, span.end + 24);
+  return text.slice(start, end).replace(/\s+/g, " ").trim().slice(0, 140);
+}
+
+function stopInstructions(text, findings) {
+  const ordered = [...findings].sort((left, right) => {
+    const rank = (item) => (QUOTED_FIRST.has(item.ruleId) ? 0 : 1);
+    const leftStart = left.span?.start ?? 0;
+    const rightStart = right.span?.start ?? 0;
+    return rank(left) - rank(right) || leftStart - rightStart;
+  });
+  const groups = [];
+  for (const item of ordered) {
+    let group = groups.find((entry) => entry.reason === item.reason);
+    if (!group) {
+      if (groups.length >= 4) continue;
+      group = {reason: item.reason, quotes: []};
+      groups.push(group);
+    }
+    const quote = quoteWindow(text, item);
+    if (quote && group.quotes.length < 2 && !group.quotes.includes(quote)) group.quotes.push(quote);
+  }
+  return groups.map((group) => {
+    if (!group.quotes.length) return group.reason;
+    const shown = group.quotes.map((quote) => `"${quote}"`).join("; ");
+    return `${group.reason} Fix: ${shown}.`;
+  }).join(" ");
+}
+
 export function evaluateStopHook(input) {
   if (input === null || typeof input !== "object" || typeof input.last_assistant_message !== "string") {
     return {};
@@ -200,7 +243,8 @@ export function evaluateStopHook(input) {
     ? input.bindings
     : readSessionBindings(input.session_id);
   const question = resolveQuestion(input);
-  const report = analyzeExplanation(input.last_assistant_message, {bindings, question});
+  const text = input.last_assistant_message;
+  const report = analyzeExplanation(text, {bindings, question});
   const findings = input.stop_hook_active === true
     ? report.findings.filter((item) => item.ruleId === "opening-skips-asked-subject")
     : report.findings;
@@ -210,10 +254,9 @@ export function evaluateStopHook(input) {
   );
   if (blockScore < BLOCK_THRESHOLD) return {};
 
-  const instructions = findings.map((item) => item.reason).join(" ");
   return {
     decision: "block",
-    reason: `Revise the final response once: ${instructions}`,
+    reason: `Revise the final response once: ${stopInstructions(text, findings)}`,
   };
 }
 

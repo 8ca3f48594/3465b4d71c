@@ -179,6 +179,26 @@ test('a leftover-empty line that only announces terms are coming fails', () => {
   assert.equal(revision.decision, 'block');
 });
 
+test('a colon line that only names the upcoming piece is an empty announcement', () => {
+  const live = [
+    'A container is one running instance of an image.',
+    "Here's the sequence:",
+    'You replace the container. The log is gone.',
+  ].join('\n');
+  const kept = [
+    'A container is one running instance of an image.',
+    'You replace the container. The log is gone.',
+  ].join('\n');
+  assert.ok(analyzeExplanation(live).findings.some(item => item.ruleId === 'empty-setup-sentence' && /sequence/.test(item.evidence)));
+  assert.equal(analyzeExplanation(kept).findings.some(item => item.ruleId === 'empty-setup-sentence'), false);
+  const hook = evaluateStopHook({
+    stop_hook_active: false,
+    last_assistant_message: live,
+  });
+  assert.equal(hook.decision, 'block');
+  assert.match(hook.reason, /Here's the sequence/);
+});
+
 test('empty setup blocks answers and is omitted from prompt-mode style', () => {
   const text = "A race condition is two tasks reading and writing the same shared value. Here's why. Both write 6.";
   assert.ok(inspectStyle(text).some(item => item.blocking && item.ruleId === 'empty-setup-sentence'));

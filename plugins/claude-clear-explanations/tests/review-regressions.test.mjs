@@ -329,7 +329,7 @@ test("the repo marketplace catalogs this plugin for GitHub install", () => {
   );
   assert.equal(manifest.name, "c90373deff");
   const usage = readFileSync(join(pluginRoot, "docs", "usage.md"), "utf8");
-  assert.match(usage, /plugin marketplace add jacksondavidprice-ui\/aibutgood/i);
+  assert.match(usage, /plugin marketplace add 8ca3f48594\/3465b4d71c/i);
   assert.match(usage, /plugin install c90373deff@a2e76ac3fa/i);
   assert.match(usage, /\/c90373deff:explain/);
   assert.doesNotMatch(usage, /plugin install clear-explanations@/i);

@@ -104,15 +104,23 @@ function pairsFromParentheticals(source) {
   return pairs;
 }
 
+function pushLikePair(pairs, termWords, analogWord, from, at) {
+  const words = String(termWords).toLowerCase().split(/\s+/).filter(Boolean);
+  const term = words[words.length - 1];
+  const analog = analogKey(analogWord);
+  if (!term || SKIP_TERM.has(term) || !analog) return;
+  pairs.push({term, analog, from, at});
+}
+
 function pairsFromLikeMaps(source) {
   const pairs = [];
-  const pattern = /\b(?:A|An|The) ((?:[A-Za-z][A-Za-z-]{2,} ){0,3}[A-Za-z][A-Za-z-]{2,}) (?:is|are)\b[^.!?\n]{0,160} like (?:a |an |the )([a-z][a-z-]{2,})/gi;
-  for (const match of source.matchAll(pattern)) {
-    const words = match[1].toLowerCase().split(/\s+/).filter(Boolean);
-    const term = words[words.length - 1];
-    const analog = analogKey(match[2]);
-    if (SKIP_TERM.has(term) || !analog) continue;
-    pairs.push({term, analog, from: match.index, at: match.index + match[0].length});
+  const head = /\b(?:A|An|The) ((?:[A-Za-z][A-Za-z-]{2,} ){0,3}[A-Za-z][A-Za-z-]{2,}) (?:is|are)\b[^.!?\n]{0,160}? like (?:a |an |the )([a-z][a-z-]{2,})/gi;
+  for (const match of source.matchAll(head)) {
+    pushLikePair(pairs, match[1], match[2], match.index, match.index + match[0].length);
+  }
+  const coordinated = /\b(?:and|or) (?:a |an |the )?((?:[A-Za-z][A-Za-z-]{2,} ){0,3}[A-Za-z][A-Za-z-]{2,}) (?:is|are) like (?:a |an |the )([a-z][a-z-]{2,})/gi;
+  for (const match of source.matchAll(coordinated)) {
+    pushLikePair(pairs, match[1], match[2], match.index, match.index + match[0].length);
   }
   return pairs;
 }

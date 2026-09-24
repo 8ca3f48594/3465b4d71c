@@ -189,6 +189,30 @@ test('a later use must keep the analog noun phrase, not a shortened remnant', ()
   assert.deepEqual(detectDroppedAnalog(mappingOnly), []);
 });
 
+test('a coordinated like-sentence maps both terms, and a shortened remnant still fails', () => {
+  const coordinated = [
+    'A Docker image is a packaged set of files. A container is one running instance made from that image.',
+    'An image is like a recipe, and a container is like a dish made from that recipe.',
+    'A write goes in the container (the running dish), not the image (the recipe).',
+    'Replace the container (the running dish) from the same image (the recipe). The log is gone.',
+  ].join(' ');
+  assert.deepEqual(detectDroppedAnalog(coordinated, sliceBindings), []);
+  const shortened = [
+    coordinated,
+    'The new container (the new dish) gets an empty layer. The old container (the old dish) is gone.',
+  ].join(' ');
+  const dropped = detectDroppedAnalog(shortened, sliceBindings);
+  assert.ok(dropped.some(item => item.ruleId === 'dropped-analog' && /shortened remnant/.test(item.reason)));
+  assert.equal(dropped.some(item => /before any parenthetical/.test(item.reason)), false);
+  const hook = evaluateStopHook({
+    stop_hook_active: false,
+    last_assistant_message: shortened,
+    bindings: sliceBindings,
+  });
+  assert.equal(hook.decision, 'block');
+  assert.match(hook.reason, /the new dish/);
+});
+
 test('collectAnalogPairs reads article parentheticals from a slice', () => {
   const slice = [
     'A Docker image is packaged files, like a recipe. A container is one instance, like a dish.',
