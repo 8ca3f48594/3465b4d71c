@@ -318,23 +318,28 @@ test("usage documents the checker's exact Markdown scope", () => {
 });
 
 test("the repo marketplace catalogs this plugin for GitHub install", () => {
-  const marketplacePath = join(pluginRoot, "..", "..", ".claude-plugin", "marketplace.json");
-  const marketplace = JSON.parse(readFileSync(marketplacePath, "utf8"));
-  assert.equal(marketplace.name, "a2e76ac3fa");
-  const plugin = marketplace.plugins.find((entry) => entry.name === "c90373deff");
-  assert.ok(plugin, "marketplace.json must list the hashed plugin name");
-  assert.equal(plugin.source, "./plugins/claude-clear-explanations");
   const manifest = JSON.parse(
     readFileSync(join(pluginRoot, ".claude-plugin", "plugin.json"), "utf8"),
   );
   assert.equal(manifest.name, "c90373deff");
   const usage = readFileSync(join(pluginRoot, "docs", "usage.md"), "utf8");
-  assert.match(usage, /plugin marketplace add 8ca3f48594\/3465b4d71c/i);
-  assert.match(usage, /plugin install c90373deff@a2e76ac3fa/i);
   assert.match(usage, /\/c90373deff:explain/);
   assert.doesNotMatch(usage, /plugin install clear-explanations@/i);
   assert.doesNotMatch(usage, /@aibutgood/i);
   assert.doesNotMatch(usage, /npx skills add/i);
+  const marketplacePath = join(pluginRoot, "..", "..", ".claude-plugin", "marketplace.json");
+  if (existsSync(marketplacePath)) {
+    const marketplace = JSON.parse(readFileSync(marketplacePath, "utf8"));
+    assert.equal(marketplace.name, "a2e76ac3fa");
+    const plugin = marketplace.plugins.find((entry) => entry.name === "c90373deff");
+    assert.ok(plugin, "marketplace.json must list the hashed plugin name");
+    assert.equal(plugin.source, "./plugins/claude-clear-explanations");
+    assert.match(usage, /plugin marketplace add 8ca3f48594\/3465b4d71c/i);
+    assert.match(usage, /plugin install c90373deff@a2e76ac3fa/i);
+    return;
+  }
+  assert.match(usage, /not a public plugin catalog/i);
+  assert.match(usage, /Do not add it with/i);
 });
 
 test("usage describes one-revision converge without claiming explanation-only scope", () => {
