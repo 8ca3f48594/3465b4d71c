@@ -103,8 +103,8 @@ set of AI-ism phrases:
 - an opening that uses a term before saying what kind of thing it is in
   this setting;
 - a sentence that deleting it would not remove a fact, cause, limit, or
-  example result, including a multi-word colon label with no leftover
-  content, a label that only names the subject after a copula, or a
+  example result, including a colon sentence that only points at the
+  next sentence, a label that only names the subject after a copula, or a
   line that only announces that something matters, that another term
   is coming, or that terms are coming (a lone emphasized role word used
   as walkthrough chrome is not this class);
@@ -114,8 +114,8 @@ set of AI-ism phrases:
   mapping sentence, a later bare use after that mapping exists, a
   pairing supplied by an injected slice with no mapping sentence, a
   later use that shortens the analog noun phrase, or a later use
-  that drops the when the analog is a noun phrase (term's (the
-  analog's) is the same pair);
+  that drops the, or writes that, when the analog is a noun phrase
+  (term's (the analog's) is the same pair);
 
 One authored em dash, one Git misconception, one AI-ism phrase, one empty
 setup sentence, one numbered story before the example terms are defined, one

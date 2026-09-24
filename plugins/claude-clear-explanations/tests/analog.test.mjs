@@ -240,6 +240,40 @@ test('works like and a following it-is-like sentence are the same mapping', () =
   assert.equal(dropped.some(item => /before any parenthetical/.test(item.reason)), false);
 });
 
+test('that packet (that recipe) is not packet (the recipe), and a revision does not block again', () => {
+  const bindings = [
+    {term: 'packet', analog: 'recipe'},
+    {term: 'answer', analog: 'dish'},
+  ];
+  const slipped = [
+    'The teaching packet is like a recipe, and the running answer is like a dish.',
+    'I wrote the answer (the dish) from that packet (that recipe).',
+  ].join(' ');
+  const held = 'I wrote the answer (the dish) from that packet (the recipe).';
+  const dropped = detectDroppedAnalog(slipped, bindings);
+  assert.ok(dropped.some(item => item.ruleId === 'dropped-analog' && item.evidence.toLowerCase() === 'packet'));
+  assert.match(dropped.find(item => item.evidence.toLowerCase() === 'packet').reason, /not that/);
+  const clean = [
+    'The teaching packet is like a recipe, and the running answer is like a dish.',
+    held,
+  ].join(' ');
+  assert.deepEqual(detectDroppedAnalog(clean, bindings), []);
+  const first = evaluateStopHook({
+    stop_hook_active: false,
+    last_assistant_message: slipped,
+    bindings,
+    prompt: 'How does the /c90373deff:explain skill work?',
+  });
+  assert.equal(first.decision, 'block');
+  assert.match(first.reason, /not that/);
+  assert.deepEqual(evaluateStopHook({
+    stop_hook_active: true,
+    last_assistant_message: slipped,
+    bindings,
+    prompt: 'How does the /c90373deff:explain skill work?',
+  }), {});
+});
+
 test('a revision still stands when a shortened analog or a new announcement remains', () => {
   const question = 'Explain why replacing a Docker container does not keep files written only to its writable layer.';
   const revision = [

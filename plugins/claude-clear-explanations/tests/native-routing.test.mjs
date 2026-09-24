@@ -553,6 +553,7 @@ test('a question about this skill loads the explain-skill slice only', async () 
   assert.match(guide.text, /like a recipe/);
   assert.match(guide.text, /like a dish/);
   assert.match(guide.text, /packet \(the recipe\)/);
+  assert.match(guide.text, /that packet \(the recipe\)/);
   assert.match(guide.text, /answer \(the dish\)/);
   assert.ok(guide.text.search(/like a recipe/) < guide.text.search(/packet \(the recipe\)/));
   assert.equal(analyzeExplanation(guide.text).shouldBlock, false);

@@ -7,7 +7,7 @@ const SKIP_TERM = new Set([
 ]);
 
 const MAP_REASON = 'State the analog mapping in plain words before any parenthetical. The first use of the analog is that mapping sentence, not term (the analog).';
-const FORM_REASON = 'After the mapping sentence, later uses of that term are term (the analog) until the binding is done. Keep the analog noun phrase from that mapping or a supplied slice pair, not a shortened remnant. Keep the in the parenthetical when the analog is a noun phrase. term\'s (the analog\'s) is the same pair.';
+const FORM_REASON = 'After the mapping sentence, later uses are term (the analog) until the binding is done. Keep the analog noun phrase from that mapping or a supplied slice pair, not a shortened remnant. Keep the in the parenthetical through the last use, not that. term\'s (the analog\'s) is the same pair.';
 const SUBSTITUTE_REASON = 'If a supplied slice pairs a term with an analog, reuse that pairing. Do not substitute a different analog for the same term.';
 
 function analogKey(analog) {

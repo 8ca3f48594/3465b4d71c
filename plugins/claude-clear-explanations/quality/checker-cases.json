@@ -410,14 +410,14 @@
     {
       "id": "empty-setup-announces-terms-coming",
       "tags": ["empty-setup", "ai-ism"],
-      "text": "A request is a message that names an action. A few terms the example needs: a client is the program sending the request. Repeating the same request leaves the same end state.",
+      "text": "A request is a message that names an action.\nA few terms the example needs:\nA client is the program sending the request. Repeating the same request leaves the same end state.",
       "expectedRuleIds": ["empty-setup-sentence"],
       "shouldBlock": true
     },
     {
       "id": "empty-setup-announces-terms-twin",
       "tags": ["empty-setup", "ai-ism"],
-      "text": "A cache is a fast local copy. These terms this example needs: a miss is a read that opens the file. Later reads return the stored copy.",
+      "text": "A cache is a fast local copy.\nThese terms this example needs:\nA miss is a read that opens the file. Later reads return the stored copy.",
       "expectedRuleIds": ["empty-setup-sentence"],
       "shouldBlock": true
     },
@@ -575,9 +575,16 @@
     {
       "id": "empty-setup-colon-label",
       "tags": ["empty-setup", "ai-ism"],
-      "text": "A race condition is two tasks reading and writing the same shared value. The key fact: both write 6. One increment is lost.",
+      "text": "A race condition is two tasks reading and writing the same shared value.\nHere's the key fact:\nBoth write 6. One increment is lost.",
       "expectedRuleIds": ["empty-setup-sentence"],
       "shouldBlock": true
+    },
+    {
+      "id": "empty-setup-label-plus-facts",
+      "tags": ["empty-setup", "false-positive-counterexample"],
+      "text": "A Docker container is one running instance of an image. Here's an example: you start a container, write a log file, then replace it, and the log is gone.",
+      "expectedRuleIds": [],
+      "shouldBlock": false
     },
     {
       "id": "unnamed-demonstrative-copy",

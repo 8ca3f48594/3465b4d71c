@@ -30,9 +30,10 @@ test('a sentence with no leftover content after function, filler, and role words
   assert.equal(isEmptySetupSentence("Here's why."), true);
   assert.equal(isEmptySetupSentence('This is the point.'), true);
   assert.equal(isEmptySetupSentence('Now the example.'), true);
-  assert.equal(isEmptySetupSentence('What it does: it delivers bytes as one stream.'), true);
-  assert.equal(isEmptySetupSentence("That's the key fact: both write 6."), true);
-  assert.equal(isEmptySetupSentence('A few terms this needs: a write is one send call.'), true);
+  assert.equal(isEmptySetupSentence('What it does: it delivers bytes as one stream.'), false);
+  assert.equal(isEmptySetupSentence("That's the key fact: both write 6."), false);
+  assert.equal(isEmptySetupSentence('A few terms this needs: a write is one send call.'), false);
+  assert.equal(isEmptySetupSentence("Here's an example: you start a container, write a log file, then replace it. The log is gone."), false);
   assert.equal(isEmptySetupSentence('The subject is contact bounce: a physical behavior of the switch.'), true);
   assert.equal(isEmptySetupSentence('To see why, you need three more pieces, each defined before it\'s used:'), true);
   assert.equal(isEmptySetupSentence('Example: both write 6.'), false);
@@ -80,19 +81,20 @@ test('a name-only subject label and an upcoming-pieces line fail stay-or-cut', (
   assert.equal(analyzeExplanation(kept).findings.some(item => item.ruleId === 'empty-setup-sentence'), false);
 });
 
-test('a colon label with no leftover content fails, and a one-word label does not', () => {
-  const live = [
+test('a label plus the facts in the same sentence stays, and a colon that only points ahead fails', () => {
+  const pointsAhead = [
     'TCP is a way for two programs to send data back and forth reliably.',
-    'What it does: it delivers bytes as one stream.',
-    "That's the key fact: TCP does not preserve write boundaries.",
-  ].join(' ');
-  const twin = 'A race condition is two tasks reading the same value. The key fact: both write 6. One increment is lost.';
+    'What it does:',
+    "Here's the key fact:",
+  ].join('\n');
+  const sameSentence = 'A race condition is two tasks reading the same value. The key fact: both write 6. One increment is lost.';
+  const example = "A Docker container is one running instance. Here's an example: you start a container (the running dish), write a log file, then replace the container (the running dish) using the same image (the recipe). The log is gone.";
   const kept = 'A race condition is two tasks reading the same value. Example: both write 6. One increment is lost.';
-  const liveReport = analyzeExplanation(live);
-  assert.ok(liveReport.findings.some(item => item.ruleId === 'empty-setup-sentence'));
-  assert.equal(liveReport.findings.some(item => /what it does/i.test(item.evidence)), true);
-  assert.ok(analyzeExplanation(twin).findings.some(item => item.ruleId === 'empty-setup-sentence'));
-  assert.equal(analyzeExplanation(twin).findings.some(item => /what it does/i.test(item.evidence)), false);
+  const ahead = analyzeExplanation(pointsAhead);
+  assert.ok(ahead.findings.some(item => item.ruleId === 'empty-setup-sentence' && /what it does/i.test(item.evidence)));
+  assert.ok(ahead.findings.some(item => item.ruleId === 'empty-setup-sentence' && /key fact/i.test(item.evidence)));
+  assert.equal(analyzeExplanation(sameSentence).findings.some(item => item.ruleId === 'empty-setup-sentence'), false);
+  assert.equal(analyzeExplanation(example).findings.some(item => item.ruleId === 'empty-setup-sentence'), false);
   assert.equal(analyzeExplanation(kept).findings.some(item => item.ruleId === 'empty-setup-sentence'), false);
 });
 
@@ -143,17 +145,19 @@ test('a leftover-empty announcement is the same stay-or-cut class', () => {
 test('a leftover-empty line that only announces terms are coming fails', () => {
   const live = [
     'A request is a message that names an action.',
-    'A few terms the example needs: a client is the program sending the request.',
+    'A few terms the example needs:',
+    'A client is the program sending the request.',
     'Repeating the same request leaves the same end state.',
   ].join('\n');
   const twin = [
     'A cache is a fast local copy.',
-    'These terms this example needs: a miss is a read that opens the file.',
+    'These terms this example needs:',
+    'A miss is a read that opens the file.',
     'Later reads return the stored copy.',
   ].join('\n');
   const kept = [
     'A cache is a fast local copy.',
-    'A miss is a read that opens the file.',
+    'A few terms the example needs: a miss is a read that opens the file.',
     'Later reads return the stored copy.',
   ].join('\n');
   const liveReport = analyzeExplanation(live);

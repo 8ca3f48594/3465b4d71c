@@ -3,4 +3,4 @@
 A teaching packet is the injected guide for this turn, like a recipe.
 A running answer is one explanation built from that packet, like a dish made from that recipe.
 
-The reader asks how this skill writes an explanation. inject-guides matches those terms, attaches the matched slice, and injects the packet (the recipe). The model writes the answer (the dish) from those files. The Stop hook checks the answer (the dish) and asks for one revision or lets it stand.
+The reader asks how this skill writes an explanation. inject-guides matches those terms, attaches the matched slice, and injects the packet (the recipe). The model writes the answer (the dish) from that packet (the recipe). The Stop hook checks the answer (the dish) and asks for one revision or lets it stand.
